@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
 
+/**
+ * 1. Context는 top level 컴포넌트에서 app 전체에 props를 전달함
+ */
 const ThemeContext = React.createContext();
 
 export default function UseContextHook() {
