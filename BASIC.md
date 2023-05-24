@@ -4,7 +4,7 @@
 
 ## UseState 와 비동기 함수를 같이 사용할 때 주의점
 
-1. 상태 업데이트의 비동기성: useState 함수를 사용하여 상태를 업데이트할 때, 해당 업데이트가 비동기적으로 처리될 수 있다. 이는 상태 업데이트가 즉시 반영되지 않을 수 있다는 것을 의미합니다. 따라서, 비동기 함수에서 상태를 업데이트하고 해당 상태 값을 의존하는 작업을 수행하는 경우, 예상과 다른 동작이 발생할 수 있다.
+1. 상태 업데이트의 비동기성: useState 함수를 사용하여 상태를 업데이트할 때, 해당 업데이트가 비동기적으로 처리될 수 있다. 이는 상태 업데이트가 즉시 반영되지 않을 수 있다는 것을 의미한다. 따라서, 비동기 함수에서 상태를 업데이트하고 해당 상태 값을 의존하는 작업을 수행하는 경우, 예상과 다른 동작이 발생할 수 있다.
 
 2. 클로저 문제: 비동기 함수에서 상태를 업데이트하거나 상태 값을 읽을 때 클로저(closure) 문제가 발생할 수 있다. 비동기 함수는 상태 값의 최신 버전을 캡처하지 못하고 이전 값을 참조할 수 있다.
 
@@ -75,6 +75,15 @@ const fetchData = async () => {
 };
 ```
 
+```jsx
+const fetchData = () => {
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => setData(data))
+    .catch((error) => setError(error));
+};
+```
+
 <br/>
 
 ## useEffect의 관점에서 컴포넌트 생명주기
@@ -115,8 +124,8 @@ useEffect(() => {
 }, [resourceType, windowWidth]);
 ```
 
-[console]
-fetch finished
+[console]  
+fetch finished  
 resource type changed
 
 vs 2.
@@ -133,8 +142,8 @@ useEffect(() => {
 }, [resourceType, windowWidth]);
 ```
 
-[console]
-resource type changed
+[console]  
+resource type changed  
 fecth finished
 
 then 메소드는 비동기적으로 실행되지 않고, 해당 fetch 프로미스가 해결되었을 때 실행되어야 하는 함수를 등록하는 역할을 한다. 그러나 위의 코드에서는 console.log("fetch finished") 함수가 then 메소드에 직접 전달되고 실행된다. 따라서 fetch 요청이 완료되기 전에 console.log("fetch finished")가 동기적으로 실행되며, 그 후에 fetch 요청의 결과를 받아와서 json을 업데이트하고 있다.
