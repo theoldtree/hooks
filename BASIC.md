@@ -1,7 +1,6 @@
 # HOOK 꿀팁 대방출
 
 <br/>
-<br/>
 
 ## UseState 와 비동기 함수를 같이 사용할 때 주의점
 
@@ -76,8 +75,7 @@ const fetchData = async () => {
 };
 ```
 
-
-
+<br/>
 
 ## useEffect의 관점에서 컴포넌트 생명주기
 
@@ -99,8 +97,7 @@ const fetchData = async () => {
 4. useEffect 실행: 가상 DOM이 실제 DOM에 반영된 후, useEffect의 첫 번째 매개변수로 전달한 함수가 실행된다.
 5. 화면 업데이트: useEffect 이후에 화면이 업데이트되며, 사용자는 업데이트된 화면을 볼 수 있다.
 
-
-
+<br/>
 
 ## 비동기 함수에서 .then 사용시 주의 점
 
