@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# Object
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br></br>
 
-## Available Scripts
+### in 으로 object 안의 property 존재 여부를 알 수 있음.
 
-In the project directory, you can run:
+```js
+let user = { name: "John", age: 30 };
 
-### `yarn start`
+alert("age" in user); // true, user.age exists
+alert("blabla" in user); // false, user.blabla doesn't exist
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### for(key in object)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```js
+let user = {
+  name: "John",
+  age: 30,
+  isAdmin: true,
+};
 
-### `yarn test`
+for (let key in user) {
+  // keys
+  alert(key); // name, age, isAdmin
+  // values for the keys
+  alert(user[key]); // John, 30, true
+}
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Method Shorthand
 
-### `yarn build`
+```js
+// these objects do the same
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+user = {
+  sayHi: function () {
+    alert("Hello");
+  },
+};
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+// method shorthand looks better, right?
+user = {
+  sayHi() {
+    // same as "sayHi: function(){...}"
+    alert("Hello");
+  },
+};
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Reference => 같은 메모리를 참조함.
 
-### `yarn eject`
+```js
+let user = { name: "John" };
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+let admin = user;
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+admin.name = "Pete"; // changed by the "admin" reference
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+alert(user.name); // 'Pete', changes are seen from the "user" reference
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### const obj 안의 porperty의 수정은 가능 (but!, obj = ... 로 수정은 불가)
 
-## Learn More
+```js
+const user = {
+  name: "John",
+};
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+user.name = "Pete"; // (*)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+alert(user.name); // Pete
+```
 
-### Code Splitting
+### object property copy
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```js
+Object.assign(dest, ...sources);
+```
 
-### Analyzing the Bundle Size
+sources object안의 property값을 dest로 옮길 수 있다.
+property가 중복이라면 값이 overwritten됨.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### optional Changing
 
-### Making a Progressive Web App
+value?.prop:
+만약 value 가 존재한다면, value.prop과 같이 작동함
+존재하지 않는다면 (undefined/null) undefined를 반환.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```js
+let user = {}; // user has no address
 
-### Advanced Configuration
+alert(user?.address?.street); // undefined (no error)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+let userAdmin = {
+  admin() {
+    alert("I am admin");
+  },
+};
 
-### Deployment
+//?.()
+let userGuest = {};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+userAdmin.admin?.(); // I am admin
 
-### `yarn build` fails to minify
+userGuest.admin?.(); // nothing happens (no such method)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+//?.[]
+let key = "firstName";
+
+let user1 = {
+  firstName: "John",
+};
+
+let user2 = null;
+
+alert(user1?.[key]); // John
+alert(user2?.[key]); // undefined
+```
+
+- obj?.prop – returns obj.prop if obj exists, otherwise undefined.
+- obj?.[prop] – returns obj[prop] if obj exists, otherwise undefined.
+- obj.method?.() – calls obj.method() if obj.method exists, otherwise returns undefined.
