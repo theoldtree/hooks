@@ -307,3 +307,84 @@ alert(str.slice(0, 1)); // 's', from 0 to 1, but not including 1, so only charac
 let str = "stringify";
 alert(str.slice(2)); // 'ringify', from the 2nd position till the end
 ```
+
+```js
+let str = "stringify";
+
+// these are same for substring
+alert(str.substring(2, 6)); // "ring"
+alert(str.substring(6, 2)); // "ring"
+
+// ...but not for slice:
+alert(str.slice(2, 6)); // "ring" (the same)
+alert(str.slice(6, 2)); // "" (an empty string)
+```
+
+## JSON(JavaScript Object Notation)
+
+### JSON.stringify
+
+- object type을 string형으로 변환시켜주는 메소드
+- object외ㅔ오 다양한 type을 지원함
+- object 안의 함수형이나, 값이 undefined인것, Symbolic keys and values는 *skip*됨.
+
+```js
+let student = {
+  name: "John",
+  age: 30,
+  isAdmin: false,
+  courses: ["html", "css", "js"],
+  spouse: null,
+};
+
+let json = JSON.stringify(student);
+
+alert(typeof json); // we've got a string!
+
+alert(json);
+/* JSON-encoded object:
+{
+  "name": "John",
+  "age": 30,
+  "isAdmin": false,
+  "courses": ["html", "css", "js"],
+  "spouse": null
+}
+*/
+```
+
+```js
+// a number in JSON is just a number
+alert(JSON.stringify(1)); // 1
+
+// a string in JSON is still a string, but double-quoted
+alert(JSON.stringify("test")); // "test"
+
+alert(JSON.stringify(true)); // true
+
+alert(JSON.stringify([1, 2, 3])); // [1,2,3]
+```
+
+## 단축평가
+
+<br></br>
+
+### ||
+
+```js
+값 || true; // 값
+값 || false; // 값
+true || 값; // 값
+false || 값; // 값
+값A || 값B; // 값A
+```
+
+### &&
+
+```js
+false && 값; // 값
+true && 값; // 값
+값 && false; // false
+값 && true; // true
+값A && 값B; // 값B
+```
