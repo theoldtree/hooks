@@ -388,3 +388,18 @@ true && 값; // 값
 값 && true; // true
 값A && 값B; // 값B
 ```
+
+### ??
+
+```js
+let name;
+//좌측값이 null 이거나 undefined 이면 오른쪽값 출력
+name = name ?? "안유진"; // "안유진"
+```
+
+### Boolean
+
+```js
+false; // null, undefined, '', false, 0
+true; // true, 값이 있는것 -> 0을 제외한 숫자 or string
+```
