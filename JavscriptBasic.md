@@ -1,7 +1,5 @@
 # Object
 
-<br></br>
-
 ### in 으로 object 안의 property 존재 여부를 알 수 있음.
 
 ```js
@@ -125,7 +123,14 @@ alert(user2?.[key]); // undefined
 ## Array Method
 
 - array는 object타입임
-  <br></br>
+- 원래 있던 arr이 변하는 메소드 : pop, push, shift, splice
+- _기존의 arr이 변하지 않는_ 메소드 : concat<원래 배열뒤에 붙이기>, slice<원래있던 배열에서 잘라오기>
+- ...arr => arr배열의 요소들을 펼쳐줌
+
+### arr.shift
+
+- arr안의 첫번째 값을 반환
+- arr안의 첫번째 값은 사라짐
 
 ### arr.splice
 
@@ -249,6 +254,11 @@ alert(rest[1]); // of the Roman Republic
 alert(rest.length); // 2
 ```
 
+### Arr.join()
+
+- argument가 없으면 ,으로 배열 안의 요소들이 string으로 합쳐짐
+- argument가 있으면 해당 값으로 요소들 사이사이에 string으로 합쳐짐
+
 ### Object Destructing
 
 ```js
@@ -266,8 +276,6 @@ alert(height); // 200
 ```
 
 ## String
-
-<br></br>
 
 ### backtics ``
 
@@ -367,8 +375,6 @@ alert(JSON.stringify([1, 2, 3])); // [1,2,3]
 
 ## 단축평가
 
-<br></br>
-
 ### ||
 
 ```js
@@ -401,5 +407,5 @@ name = name ?? "안유진"; // "안유진"
 
 ```js
 false; // null, undefined, '', false, 0
-true; // true, 값이 있는것 -> 0을 제외한 숫자 or string
+true; // true, {}, [], 값이 있는것 -> 0을 제외한 숫자 or *공백이 아닌* string
 ```
