@@ -334,7 +334,7 @@ alert(str.slice(6, 2)); // "" (an empty string)
 
 - object type을 string형으로 변환시켜주는 메소드
 - object외ㅔ오 다양한 type을 지원함
-- object 안의 함수형이나, 값이 undefined인것, Symbolic keys and values는 *skip*됨.
+- object 안의 함수형이나, 값이 undefined인것, Symbolic keys and values는 **skip**됨.
 
 ```js
 let student = {
